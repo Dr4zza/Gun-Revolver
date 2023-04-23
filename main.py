@@ -49,6 +49,7 @@ while True:
                 enemies = []
                 ammo = []
                 player.player_rect.center = (200,300)
+            
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if player.gun_inactive == False:
