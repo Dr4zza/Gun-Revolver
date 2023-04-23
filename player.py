@@ -4,6 +4,8 @@ from PIL import Image
 import particlepy
 
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.set_volume(0.7)
 screen = pygame.display.set_mode((1000,600)) # Creates a window
 pygame.display.set_caption('Gun Revolver') # sets a title of the window
 clock = pygame.time.Clock() # a variable to set the fps
