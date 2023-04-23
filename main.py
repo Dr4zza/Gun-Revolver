@@ -4,6 +4,7 @@ import player
 import random
 import particlepy
 
+
 bullets = []
 enemy_bullets = []
 enemies = []
@@ -50,6 +51,8 @@ while True:
                         pos = (player.player_rect.centerx,player.player_rect.centery)
                         bullets.append(player.Bullet(*pos))
                         bulletleft -= 1
+                        pygame.mixer.music.load('graphics/gunshot.mp3')
+                        pygame.mixer.music.play()
                     player.shot = True
                 if player.player_rect.collidepoint(event.pos):
                     player.moving = True
@@ -135,6 +138,7 @@ while True:
                 pos2 = (enemy.rect.centerx, enemy.rect.centery)
                 enemy_bullets.append(player.EnemyBullet(*pos2))
                 t2 = 0
+                pygame.mixer.music.play()
 
         if t4 > 45:
             player.score += 1
