@@ -193,6 +193,7 @@ class Enemy:
         rotimg = pygame.transform.rotate(pistol_surf, angle)
         rects = rotimg.get_rect(center = self.rect.center)
         screen.blit(rotimg, rects)
+        return rects
     
 
     def draw(self, surf):
@@ -212,6 +213,7 @@ class EnemyBullet():
 
         self.bullet = bullet_surf
         self.bullet = pygame.transform.rotate(self.bullet, angle)
+        self.rect = self.bullet.get_rect()
         self.speed = 8 
 
     def update(self):
