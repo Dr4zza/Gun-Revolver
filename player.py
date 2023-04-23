@@ -98,7 +98,7 @@ class gun():
         rotimg = pygame.transform.rotate(gun_surf, angle)
         rects = rotimg.get_rect(center = player_rect.center)
         screen.blit(rotimg, rects)
-        return angle
+        return angle, rects
 
 
 class Bullet():

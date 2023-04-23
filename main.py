@@ -2,6 +2,7 @@ import pygame
 from sys import exit
 import player
 import random
+import time
 import particlepy
 
 
@@ -17,6 +18,10 @@ t4 = 0
 enemy_spawn = 80
 bullet_rate = 70
 reload_spawn = 100
+old_time = time.time()
+delta_time = 0
+particle_system = particlepy.particlepy.particle.ParticleSystem()
+pos4 = [(-100,-100)]
 
 while True:
 #   the part of the code that allows you to quit the game
@@ -71,7 +76,7 @@ while True:
             
         for bullet in bullets[:]:
             player.Bullet.update(bullet)
-            angle = player.gun.gunrotate()
+            angle = player.gun.gunrotate()[0]
             if angle < 360 and angle > 180:
                 player.player_gravity = 0
             else:
@@ -93,6 +98,11 @@ while True:
         t2 += dt
         t3 += dt
         t4 += dt
+
+        now = time.time()
+        delta_time = now - old_time
+        old_time = now
+        particle_system.update(delta_time=delta_time)
 
         text_surface = player.text_font.render(str(bulletleft) ,False, "Green")
         score_surface = player.text_font.render(str(player.score), False, "Black")
@@ -138,6 +148,7 @@ while True:
                 pos2 = (enemy.rect.centerx, enemy.rect.centery)
                 enemy_bullets.append(player.EnemyBullet(*pos2))
                 t2 = 0
+                pygame.mixer.music.load('graphics/gunshot.mp3')
                 pygame.mixer.music.play()
 
         if t4 > 45:
@@ -179,8 +190,25 @@ while True:
             if len(ammo) != 1:
                 ammo.remove(ammos)
 
+        for bullet in bullets[:]:
+            if bullet.rect.colliderect(player.gun.gunrotate()[1]):
+                pos4.append(bullet.pos)
+            else:
+                for _ in range(5):
+                    if len(bullets) > 0:
+                        particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(113, 113, 113),alpha=255),position=pos4[-1],velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
+                pos4 = [(-100,-100)]
+
         for bullet in bullets:
             player.Bullet.draw(bullet,player.screen)
+
+
+        particle_system.make_shape()
+
+        for particle in particle_system.particles:
+            particle.shape.angle += 5
+
+        particle_system.render(surface=player.screen)
 
         player.Player.playergravity()
         player.Player.playerfriction()
