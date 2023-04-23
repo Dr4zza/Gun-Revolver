@@ -2,6 +2,7 @@ import pygame
 from sys import exit
 import player
 import random
+import particlepy
 
 bullets = []
 enemy_bullets = []
