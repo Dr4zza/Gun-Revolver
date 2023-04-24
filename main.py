@@ -94,6 +94,8 @@ while True:
             if not player.screen.get_rect().collidepoint(bullet.pos):
                 bullets.remove(bullet)
             elif bullet.pos[1] > 550:
+                particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(134, 225, 88),alpha=255),position=(bullet.pos[0],550),velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
+                particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(79, 52, 42),alpha=255),position=(bullet.pos[0],550),velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
                 bullets.remove(bullet)
 
             if bullet.rect.colliderect(player.gun.gunrotate()[1]):
