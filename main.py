@@ -33,6 +33,7 @@ while True:
             elif player.player_health == -15:
                 player.game_active = False
                 bulletleft = 100
+                particle_system = particlepy.particlepy.particle.ParticleSystem()
                 player.player_health = 10
                 bullets = []
                 enemy_bullets = []
@@ -43,6 +44,7 @@ while True:
             elif bulletleft == 0:
                 player.game_active = False
                 bulletleft = 100
+                particle_system = particlepy.particlepy.particle.ParticleSystem()
                 player.player_health = 10
                 bullets = []
                 enemy_bullets = []
@@ -100,6 +102,7 @@ while True:
                 for _ in range(5):
                     if len(bullets) > 0:
                         particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(113, 113, 113),alpha=255),position=pos4[-1],velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
+                        particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(51, 51, 51),alpha=255),position=pos4[-1],velocity=(random.uniform(-110,150), random.uniform(-110,150)),delta_radius=0.2))
                 pos4 = [(-100,-100)]
 
         dt = player.clock.tick()
@@ -145,6 +148,7 @@ while True:
             postion = (random.randrange(1,1000), random.randrange(1,570))
             for _ in range(5):
                 particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=10,angle=random.randint(0,360),color=(255, 255, 255),alpha=255),position=postion,velocity=(random.uniform(-110,150), random.uniform(-110,150)),delta_radius=0.2))
+                particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=10,angle=random.randint(0,360),color=(254, 236, 234),alpha=255),position=postion,velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
             ammo.append(postion)
             t = 0
 
@@ -173,6 +177,7 @@ while True:
                     player.player_health -= 1
                 for _ in range(5):
                     particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Circle(radius=8,angle=random.randint(0,360),color=(217, 80, 80),alpha=255),position=bullet2.pos,velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
+                    particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Circle(radius=8,angle=random.randint(0,360),color=(229, 46, 19),alpha=255),position=bullet2.pos,velocity=(random.uniform(-110,150), random.uniform(-110,150)),delta_radius=0.2))
                 enemy_bullets.remove(bullet2)
 
         for bullet2 in enemy_bullets:
@@ -185,6 +190,7 @@ while True:
                     pos5 = bullet.pos
                     for _ in range(5):
                         particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Circle(radius=8,angle=random.randint(0,360),color=(217, 80, 80),alpha=255),position=pos5,velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
+                        particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Circle(radius=8,angle=random.randint(0,360),color=(229, 46, 19),alpha=255),position=pos5,velocity=(random.uniform(-110,150), random.uniform(-110,150)),delta_radius=0.2))
                     bullets.remove(bullet)
                     enemy.life -= 1
 
