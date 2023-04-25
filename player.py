@@ -1,7 +1,7 @@
 import pygame
 import math
 from PIL import Image
-import particlepy
+
 
 pygame.init()
 pygame.mixer.init()

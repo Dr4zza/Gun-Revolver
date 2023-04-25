@@ -5,7 +5,6 @@ import random
 import time
 import particlepy
 
-
 bullets = []
 enemy_bullets = []
 enemies = []
