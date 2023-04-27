@@ -1,6 +1,8 @@
 import pygame
 import math
 from PIL import Image
+import sys
+import os
 
 
 pygame.init()
@@ -20,40 +22,62 @@ collision = False
 score = 0
 player_health = 10
 
-player_surf = pygame.image.load('graphics/player.png').convert_alpha()
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+asset_url = resource_path('graphics/player.png')
+player_surf = pygame.image.load(asset_url).convert_alpha()
 player_rect = player_surf.get_rect(topright = (200,300))
 
-gun_surf = pygame.image.load('graphics/gun.png').convert_alpha()
+asset_url = resource_path('graphics/gun.png')
+gun_surf = pygame.image.load(asset_url).convert_alpha()
 gun_rect = gun_surf.get_rect(center = player_rect.center)
 
-bullet_surf = pygame.image.load('graphics/bullet.png').convert_alpha()
+asset_url = resource_path('graphics/bullet.png')
+bullet_surf = pygame.image.load(asset_url).convert_alpha()
 bullet_rect = bullet_surf.get_rect(center = gun_rect.center)
 
-sky_surface = pygame.image.load('graphics/Sky.png').convert_alpha()
+asset_url = resource_path('graphics/Sky.png')
+sky_surface = pygame.image.load(asset_url).convert_alpha()
 
-ground_surface = pygame.image.load('graphics/ground.png').convert_alpha()
+asset_url = resource_path('graphics/ground.png')
+ground_surface = pygame.image.load(asset_url).convert_alpha()
 ground_rect = ground_surface.get_rect()
 
-enemy_surface = pygame.image.load('graphics/enemy.png').convert_alpha()
+asset_url = resource_path('graphics/enemy.png')
+enemy_surface = pygame.image.load(asset_url).convert_alpha()
 enemy_rect = enemy_surface.get_rect()
 
-pistol_surf = pygame.image.load('graphics/pistol.png').convert_alpha()
+asset_url = resource_path('graphics/pistol.png')
+pistol_surf = pygame.image.load(asset_url).convert_alpha()
 pistol_rect = pistol_surf.get_rect()
 
-shootparticle_surf = pygame.image.load('graphics/shootingparticle.png').convert_alpha()
+asset_url = resource_path('graphics/shootingparticle.png')
+shootparticle_surf = pygame.image.load(asset_url).convert_alpha()
 shootparticle_rect = shootparticle_surf.get_rect()
 
-text_font = pygame.font.Font('graphics/PixelType.ttf', 50)
+asset_url = resource_path('graphics/PixelType.ttf')
+text_font = pygame.font.Font(asset_url, 50)
 
-reload_surf = pygame.image.load('graphics/reload.png').convert_alpha()
+asset_url = resource_path('graphics/reload.png')
+reload_surf = pygame.image.load(asset_url).convert_alpha()
 
-title_surf = pygame.image.load('graphics/title.png').convert_alpha()
+asset_url = resource_path('graphics/title.png')
+title_surf = pygame.image.load(asset_url).convert_alpha()
 
-playbutton_surf = pygame.image.load('graphics/playbutton.png').convert_alpha()
+asset_url = resource_path('graphics/playbutton.png')
+playbutton_surf = pygame.image.load(asset_url).convert_alpha()
 
-gameover_surf = pygame.image.load('graphics/gameover.png').convert_alpha()
+asset_url = resource_path('graphics/gameover.png')
+gameover_surf = pygame.image.load(asset_url).convert_alpha()
 
-replay_surf = pygame.image.load('graphics/restart.png').convert_alpha()
+asset_url = resource_path('graphics/restart.png')
+replay_surf = pygame.image.load(asset_url).convert_alpha()
 
 class Player():
     def playergravity():
