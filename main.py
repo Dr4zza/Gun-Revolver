@@ -85,10 +85,11 @@ while True:
                 player.player_gravity = 1
             direction = player.Bullet.update(bullet)
 
-            player.player_rect.x += (direction[0]*-1)*5.5
-            player.player_gravity -= direction[1]*10
-            player.Player.playergravity()
-            player.screen.blit(player.player_surf,player.player_rect)
+            if player.collision == False:
+                player.player_rect.x += (direction[0]*-1)*5.5
+                player.player_gravity -= direction[1]*10
+                player.Player.playergravity()
+                player.screen.blit(player.player_surf,player.player_rect)
 
             if not player.screen.get_rect().collidepoint(bullet.pos):
                 bullets.remove(bullet)
