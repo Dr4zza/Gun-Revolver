@@ -85,11 +85,10 @@ while True:
                 player.player_gravity = 1
             direction = player.Bullet.update(bullet)
 
-            if player.collision == False:
-                player.player_rect.x += (direction[0]*-1)*5.5
-                player.player_gravity -= direction[1]*10
-                player.Player.playergravity()
-                player.screen.blit(player.player_surf,player.player_rect)
+            player.player_rect.x += (direction[0]*-1)*5.5
+            player.player_gravity -= direction[1]*10
+            player.Player.playergravity()
+            player.screen.blit(player.player_surf,player.player_rect)
 
             if not player.screen.get_rect().collidepoint(bullet.pos):
                 bullets.remove(bullet)
@@ -98,7 +97,7 @@ while True:
                 particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(79, 52, 42),alpha=255),position=(bullet.pos[0],550),velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
                 bullets.remove(bullet)
 
-            if bullet.rect.colliderect(player.gun.gunrotate()[1]):
+            if bullet.rect.colliderect(player.gun.hitbox(player.gun.gunrotate()[1])):
                 pos4.append(bullet.pos)
             else:
                 for _ in range(5):
@@ -106,6 +105,8 @@ while True:
                         particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(113, 113, 113),alpha=255),position=pos4[-1],velocity=(random.uniform(-150,150), random.uniform(-150,150)),delta_radius=0.2))
                         particle_system.emit(particlepy.particlepy.particle.Particle(shape=particlepy.particlepy.shape.Rect(radius=5,angle=random.randint(0,360),color=(51, 51, 51),alpha=255),position=pos4[-1],velocity=(random.uniform(-110,150), random.uniform(-110,150)),delta_radius=0.2))
                 pos4 = [(-100,-100)]
+
+        player.gun.hitbox(player.gun.gunrotate()[1])
 
         dt = player.clock.tick()
         t += dt

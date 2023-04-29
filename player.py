@@ -101,7 +101,7 @@ class Player():
 
 class gun():
     def gunrotate():
-        global gun_rect, gun_inactive, player_gravity
+        global gun_rect, gun_inactive, player_gravity, rects, rotimg
         pos = pygame.mouse.get_pos()
         angle = 360-math.atan2(pos[1]-player_rect.centery,pos[0]-player_rect.centerx)*180/math.pi
         #if angle < 345 and angle > 194:
@@ -123,7 +123,10 @@ class gun():
         rects = rotimg.get_rect(center = player_rect.center)
         screen.blit(rotimg, rects)
         return angle, rects
-
+    
+    def hitbox(rect):
+        rect = pygame.draw.rect(screen,(255,255,255),rect,1)
+        return rect
 
 class Bullet():
     def __init__(self, x, y):
