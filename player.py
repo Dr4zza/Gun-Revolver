@@ -21,6 +21,7 @@ shot = False
 collision = False
 score = 0
 player_health = 10
+menu_open = True
 
 def resource_path(relative_path):
     try:
@@ -78,6 +79,9 @@ gameover_surf = pygame.image.load(asset_url).convert_alpha()
 
 asset_url = resource_path('graphics/restart.png')
 replay_surf = pygame.image.load(asset_url).convert_alpha()
+
+asset_url = resource_path('graphics/backbutton.png')
+backbutton_surf = pygame.image.load(asset_url)
 
 class Player():
     def playergravity():
@@ -260,21 +264,23 @@ class particles():
 
 class menu():
     def __init__(self):
-        global game_active, score
+        global game_active, score, menu_open
         self.title_rect = title_surf.get_rect(center = (500,200))
         self.title_surf = title_surf
         self.button_surf = playbutton_surf
-        self.button_rect = playbutton_surf.get_rect(center = (500,400))
+        self.button_rect = playbutton_surf.get_rect(center = (500,345))
         self.game_over = gameover_surf
         self.game_over_rect = gameover_surf.get_rect(center = (500,300))
         self.restart_surf = replay_surf
         self.restart_rect = replay_surf.get_rect(center = (600,400))
+        self.back_button_surf = backbutton_surf
+        self.back_button_rect = backbutton_surf.get_rect(center = (440,405))
         screen.blit(sky_surface,(0,0))
         screen.blit(ground_surface,(0,550))
 
         mouse_pos = pygame.mouse.get_pos()
         
-        if score == 0:
+        if score == 0 and menu_open == True:
             if self.title_rect.collidepoint(mouse_pos):
                 transformed = pygame.transform.scale(title_surf,(613,173)).convert_alpha()
                 transformed_rect = transformed.get_rect(center = (500,200))
@@ -283,32 +289,48 @@ class menu():
 
             elif self.button_rect.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0] == False:
                 transformed = pygame.transform.scale(playbutton_surf, (311, 94)).convert_alpha()
-                transformed_rect = transformed.get_rect(center = (500,400))
+                transformed_rect = transformed.get_rect(center = (500,345))
                 screen.blit(self.title_surf,self.title_rect)
                 screen.blit(transformed, transformed_rect)
 
             elif pygame.mouse.get_pressed()[0] == True and self.button_rect.collidepoint(mouse_pos):
                 transformed = pygame.transform.scale(playbutton_surf,(207,62)).convert_alpha()
-                transformed_rect = transformed.get_rect(center = (500,400))
+                transformed_rect = transformed.get_rect(center = (500,345))
                 screen.blit(self.title_surf,self.title_rect)
                 screen.blit(transformed,transformed_rect)
                 game_active = True
+                menu_open = False
                 
             else:
                 screen.blit(self.title_surf,self.title_rect)
                 screen.blit(self.button_surf, self.button_rect)
         
-        else:
+        elif score != 0:
             if self.restart_rect.collidepoint(mouse_pos):
                 transformed = pygame.transform.scale(replay_surf, (100,100)).convert_alpha()
                 transformed_rect = transformed.get_rect(center = (600,400))
                 screen.blit(self.game_over, self.game_over_rect)
+                screen.blit(self.back_button_surf,self.back_button_rect)
                 screen.blit(transformed,transformed_rect)
                 screen.blit(text_font.render(f"Score: {str(score)}", False, "Black"),(415,300))
                 if pygame.mouse.get_pressed()[0] == True:
                     score = 0
                     game_active = True
+
+            elif self.back_button_rect.collidepoint(mouse_pos):
+                transformed = pygame.transform.scale(backbutton_surf, (218,64)).convert_alpha()
+                transformed_rect = transformed.get_rect(center = (440,405))
+                screen.blit(self.game_over, self.game_over_rect)
+                screen.blit(self.restart_surf, self.restart_rect)
+                screen.blit(transformed,transformed_rect)
+                screen.blit(text_font.render(f"Score: {str(score)}", False, "Black"),(415,300))
+                if pygame.mouse.get_pressed()[0] == True:
+                    score = 0
+                    game_active = False
+                    menu_open = True
+                    
             else:
                 screen.blit(self.game_over, self.game_over_rect)
+                screen.blit(self.back_button_surf,self.back_button_rect)
                 screen.blit(self.restart_surf, self.restart_rect)
                 screen.blit(text_font.render(f"Score: {str(score)}", False, "Black"),(415,300))
