@@ -1,8 +1,6 @@
 import pygame
 import math
 from PIL import Image
-import sys
-import os
 
 
 pygame.init()
