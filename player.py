@@ -23,64 +23,56 @@ score = 0
 player_health = 10
 menu_open = True
 
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
-asset_url = resource_path('graphics/player.png')
+asset_url =  'graphics/player.png'
 player_surf = pygame.image.load(asset_url).convert_alpha()
 player_rect = player_surf.get_rect(topright = (200,300))
 
-asset_url = resource_path('graphics/gun.png')
+asset_url =  'graphics/gun.png'
 gun_surf = pygame.image.load(asset_url).convert_alpha()
 gun_rect = gun_surf.get_rect(center = player_rect.center)
 
-asset_url = resource_path('graphics/bullet.png')
+asset_url =  'graphics/bullet.png'
 bullet_surf = pygame.image.load(asset_url).convert_alpha()
 bullet_rect = bullet_surf.get_rect(center = gun_rect.center)
 
-asset_url = resource_path('graphics/Sky.png')
+asset_url =  'graphics/Sky.png'
 sky_surface = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/ground.png')
+asset_url =  'graphics/ground.png'
 ground_surface = pygame.image.load(asset_url).convert_alpha()
 ground_rect = ground_surface.get_rect()
 
-asset_url = resource_path('graphics/enemy.png')
+asset_url =  'graphics/enemy.png'
 enemy_surface = pygame.image.load(asset_url).convert_alpha()
 enemy_rect = enemy_surface.get_rect()
 
-asset_url = resource_path('graphics/pistol.png')
+asset_url =  'graphics/pistol.png'
 pistol_surf = pygame.image.load(asset_url).convert_alpha()
 pistol_rect = pistol_surf.get_rect()
 
-asset_url = resource_path('graphics/shootingparticle.png')
+asset_url =  'graphics/shootingparticle.png'
 shootparticle_surf = pygame.image.load(asset_url).convert_alpha()
 shootparticle_rect = shootparticle_surf.get_rect()
 
-asset_url = resource_path('graphics/PixelType.ttf')
+asset_url =  'graphics/PixelType.ttf'
 text_font = pygame.font.Font(asset_url, 50)
 
-asset_url = resource_path('graphics/reload.png')
+asset_url =  'graphics/reload.png'
 reload_surf = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/title.png')
+asset_url =  'graphics/title.png'
 title_surf = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/playbutton.png')
+asset_url =  'graphics/playbutton.png'
 playbutton_surf = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/gameover.png')
+asset_url =  'graphics/gameover.png'
 gameover_surf = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/restart.png')
+asset_url =  'graphics/restart.png'
 replay_surf = pygame.image.load(asset_url).convert_alpha()
 
-asset_url = resource_path('graphics/backbutton.png')
+asset_url =  'graphics/backbutton.png'
 backbutton_surf = pygame.image.load(asset_url)
 
 class Player():
